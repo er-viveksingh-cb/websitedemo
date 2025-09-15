@@ -1,0 +1,110 @@
+import React from "react";
+import contactimage from "./contact.png"
+
+
+const ConsultationForm = () => {
+  return (
+    <section className="relative py-20 flex justify-center bg-gray-50">
+      <div className="bg-white rounded-2xl shadow-lg p-10 flex w-full max-w-6xl gap-10">
+        
+        {/* Left Form */}
+     
+     <div className="flex-1 text-center">
+  {/* Label */}
+  <span className="inline-block text-sm font-medium text-blue-700 bg-blue-100 px-3 py-1 rounded-full mb-6">
+    Schedule a Consultation
+  </span>
+
+  {/* Heading */}
+  <h2 className="mt-4 text-[#2C2C2C] font-[Manrope] text-[32px] font-normal leading-[40px] tracking-[-0.64px] text-center">
+    Just focus on your fertility journey, <br /> We got the rest covered!
+  </h2>
+
+  {/* Form Fields */}
+  <form className="mt-8 space-y-6">
+    {/* Row 1 */}
+    <div className="grid grid-cols-2 gap-4">
+      <input
+        type="text"
+        placeholder="First Name"
+        className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500"
+      />
+      <input
+        type="text"
+        placeholder="Last Name"
+        className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    {/* Row 2 */}
+    <div className="grid grid-cols-2 gap-4">
+      <input
+        type="email"
+        placeholder="Email ID"
+        className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500"
+      />
+      <input
+        type="tel"
+        placeholder="+91"
+        className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    {/* Row 3 */}
+    <div className="grid grid-cols-2 gap-4">
+      <input
+        type="date"
+        className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500"
+      />
+      <select className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500">
+        <option>Nearby Center</option>
+        <option>Mumbai</option>
+        <option>Pune</option>
+        <option>Nashik</option>
+      </select>
+    </div>
+
+    {/* Checkbox */}
+    <div className="flex items-center justify-center space-x-2">
+      <input type="checkbox" id="privacy" className="h-4 w-4" />
+      <label htmlFor="privacy" className="text-sm text-gray-600">
+        Clicking means you agree to our{" "}
+        <a href="#" className="text-blue-600 underline">
+          Privacy Policy
+        </a>{" "}
+        and T&C.
+      </label>
+    </div>
+
+    {/* Button */}
+    <button
+      type="submit"
+      className="px-6 py-3 rounded-[16px] bg-[#1656A5] text-[#F9F9F9] 
+                 font-[Manrope] text-[14px] font-medium leading-[24px] 
+                 tracking-[-0.28px] backdrop-blur-[7.5px] transition 
+                 hover:bg-[#134a91] block mx-auto"
+    >
+      Book Appointment
+    </button>
+  </form>
+</div>
+
+        {/* Right Image with Mask */}
+        <div className="flex-1 relative">
+          <div className="w-full h-full rounded-2xl overflow-hidden relative">
+            {/* Placeholder Image */}
+            <img
+              src={contactimage}
+              alt="Consultation"
+              className="w-full h-full object-cover"
+            />
+            {/* Blue mask overlay */}
+           
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ConsultationForm;
