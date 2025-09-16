@@ -78,103 +78,95 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50 px-[120px]">
-      <div className=" mx-auto px-6 grid lg:grid-cols-2 gap-12">
-        {/* Left Text */}
-        <div className="w-[410px]"> 
-          <span
-  className="text-[14px] px-3 py-1 
-             rounded-[50px] 
-             bg-[rgba(22,86,165,0.05)] 
-             text-[#1656A5] 
-             font-[Manrope] font-normal leading-[24px] tracking-[-0.28px]"
->
-  FAQ’s
-</span>
+    <section className="bg-gray-50 pt-[42px] md:pt-[84px] mx-0 px-4 md:px-[80px] lg:px-[120px] pb-[60px]">
+      <div className="mx-auto grid lg:grid-cols-2 gap-1 md:pr-[80px]">
+        {/* Header / Intro */}
+        <div className="mb-6">
+          <span className="inline-block bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full">
+            FAQ’s
+          </span>
 
-          <h2 className="mt-4 font-[Manrope] text-[48px] font-normal leading-[56px] tracking-[-0.96px] text-[#2C2C2C]">
+          <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-light text-gray-900 leading-tight">
             Quick answers to the{" "}
-            <span className="text-[#94BA3D] font-[Manrope] text-[48px] font-normal leading-[56px] tracking-[-0.96px]">
-              most common fertility-related questions.
-            </span>
+            <span className="text-green-400">most common fertility-related questions.</span>
           </h2>
 
-          <p className="mt-4 font-[Manrope] text-[16px] font-normal leading-[24px] tracking-[-0.32px] text-[rgba(44,44,44,0.50)]">
-            Didn’t find what you are looking for? <br/> Checkout{" "}
-            <a
-              href="#"
-              className="text-[#1656A5] font-[Manrope] text-[16px] font-semibold leading-[24px] tracking-[-0.32px] underline"
-            >
+          <p className="mt-4 text-sm text-gray-600">
+            Didn’t find what you are looking for?{" "}
+            <a href="#" className="text-blue-600 font-semibold underline">
               Patient Resources
             </a>{" "}
             section to know more.
           </p>
         </div>
 
-        {/* Right FAQ */}
+
         <div>
-          {/* Tabs */}
-<div className="flex flex-wrap gap-3 mb-6">
-  {categories.map((cat) => (
-    <button
-      key={cat}
-      onClick={() => {
-        setActiveCategory(cat);
-        setOpenIndex(null);
-      }}
-      className={`px-5 py-2 rounded-[16px] transition font-[Manrope] text-[14px] leading-[24px] tracking-[-0.28px] 
-        ${
-          activeCategory === cat
-            ? "bg-[#1656A5] text-white backdrop-blur-[7.5px]"
-            : "border border-[#1656A5] text-[#1656A5] hover:bg-blue-50"
-        }`}
-    >
-      {cat}
-    </button>
-  ))}
-</div>
+
+        {/* Tabs */}
+
+          <div className="flex flex-wrap gap-3 mb-6">
+            {categories.map((cat) => {
+              const active = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => {
+                    setActiveCategory(cat);
+                    setOpenIndex(null);
+                  }}
+                  className={
+                    "px-4 py-2 rounded-lg text-sm font-medium transition focus:outline-none " +
+                    (active
+                      ? "bg-blue-600 text-white"
+                      : "bg-white text-blue-600 border border-blue-200 hover:bg-blue-50")
+                  }
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
 
 
-       {/* Accordion */}
-<div className="space-y-3">
-  {faqs[activeCategory].map((item, idx) => (
-    <div
-      key={idx}
-      className="bg-white rounded-[16px]"
-    >
-      {/* Question */}
-      <button
-        onClick={() => toggleFaq(idx)}
-        className="w-full flex justify-between items-center px-6 py-4 text-left 
-                   text-[#2C2C2C] font-[Manrope] text-[16px] font-normal 
-                   leading-[24px] tracking-[-0.32px]"
-      >
-        {item.q}
-        <span className="ml-2">{openIndex === idx ? <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-  <path d="M9 13L12 10L15 13" stroke="#2C2C2C" stroke-linecap="square" stroke-linejoin="round"/>
-</svg> : <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-  <path d="M9 11L12 14L15 11" stroke="#2C2C2C" stroke-linecap="square" stroke-linejoin="round"/>
-</svg>}</span>
-      </button>
+        {/* Accordion */}
+        <div className="space-y-3">
+          {faqs[activeCategory].map((item, idx) => {
+            const opened = openIndex === idx;
+            return (
+              <div key={idx} className="bg-white rounded-xl shadow-sm overflow-hidden">
+                <button
+                  onClick={() => toggleFaq(idx)}
+                  aria-expanded={opened}
+                  className="w-full text-left px-4 py-4 flex items-center justify-between"
+                >
+                  <span className="text-gray-900 text-base font-medium">{item.q}</span>
+                  <span className="ml-3">
+                    {opened ? (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 15l-6-6-6 6" stroke="#2C2C2C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    ) : (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M6 9l6 6 6-6" stroke="#2C2C2C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                  </span>
+                </button>
 
-      {/* Answer */}
-{openIndex === idx && (
-  <div
-    className="px-6 pb-4 mt-2 
-               rounded-[50px] bg-white 
-               text-[#2C2C2C] font-[Manrope] text-[16px] 
-               font-normal leading-[24px] tracking-[-0.32px]"
-  >
-    {item.a}
-  </div>
-)}
-
-
-    </div>
-  ))}
-</div>
-
-        </div>
+                <div
+                  className={`px-4 pb-4 transition-all duration-200 ${
+                    opened ? "pt-0" : "hidden"
+                  }`}
+                >
+                  {opened && (
+                    <p className="text-gray-700 text-sm leading-relaxed">{item.a}</p>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div></div>
       </div>
     </section>
   );

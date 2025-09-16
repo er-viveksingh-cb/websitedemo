@@ -23,18 +23,15 @@ const StatsSection = () => {
     {
       label: "Centers",
       description: "Because hope should never be out of reach.",
-      value: "21+",
+      value: "20+",
     },
   ];
 
   return (
     <section
-      className="relative w-full bg-gradient-to-r from-white via-white to-blue-50 overflow-hidden"
+      className="relative w-full bg-gradient-to-r from-white via-white to-blue-50 overflow-hidden pb-[60px]"
       style={{
-        paddingLeft: "120px",
-        paddingRight: "120px",
         paddingTop: "84px",
-        height: "800px",
       }}
     >
       {/* === Blurred Gradient Shapes === */}
@@ -57,15 +54,15 @@ const StatsSection = () => {
         }}
       />
 
-      <div className="relative mx-0">
+      <div className="relative mx-0 px-4 md:px-[80px] lg:px-[120px]">
         {/* Badge */}
-        <span className="inline-block text-sm font-medium text-blue-700 bg-blue-50 px-3 py-1 rounded-full mb-4">
+        <span className="inline-block text-sm font-medium text-blue-700 bg-blue-100 px-3 py-1 rounded-full mb-4">
           Stats and Metrics
         </span>
 
         {/* Title */}
-        <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-12 max-w-3xl">
-          Let the numbers<br/> reassure your heart.
+        <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-12 max-w-3xl leading-snug">
+          Let the numbers <br className="hidden md:block" /> reassure your heart.
         </h2>
 
         {/* Stats Rows */}
@@ -73,20 +70,25 @@ const StatsSection = () => {
           {stats.map((item, index) => (
             <div
               key={index}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8 items-center"
+              className="flex flex-col md:grid md:grid-cols-3 gap-4 py-8"
             >
-              {/* Label */}
-              <h3 className="text-xl font-medium text-gray-900">
-                {item.label}
-              </h3>
+              {/* Top row: label + value side by side on mobile */}
+              <div className="flex justify-between items-center md:block">
+                <h3 className="text-lg md:text-xl font-medium text-gray-900">
+                  {item.label}
+                </h3>
+                <div className="text-xl md:hidden font-semibold text-gray-900">
+                  {item.value}
+                </div>
+              </div>
 
               {/* Description */}
-              <p className="text-gray-600 text-sm md:text-base max-w-md">
+              <p className="text-gray-600 text-sm md:text-base md:col-span-1 max-w-md">
                 {item.description}
               </p>
 
-              {/* Value */}
-              <div className="text-2xl md:text-3xl font-semibold text-gray-900 md:text-right">
+              {/* Value (desktop only) */}
+              <div className="hidden md:block text-2xl md:text-3xl font-semibold text-gray-900 md:text-right">
                 {item.value}
               </div>
             </div>

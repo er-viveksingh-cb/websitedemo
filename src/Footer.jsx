@@ -1,78 +1,85 @@
+// Footer.jsx
 import React from "react";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Footerimage from "./footer.png";
+import Logo from "./logo.svg"; // replace or keep '/logo.png' if you serve it from public/
 
-const Footer = () => {
+export default function Footer() {
   return (
     <footer
-      className="relative w-full bg-cover bg-center text-white pt-20 pb-10 px-10 md:px-20"
-      style={{
-        backgroundImage: `url(${Footerimage})`,
-      }}
+      className="relative w-full bg-cover bg-center text-white"
+      style={{ backgroundImage: `url(${Footerimage})` }}
+      aria-labelledby="footer-heading"
     >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40"></div>
+      {/* dark overlay for contrast */}
+      <div className="absolute inset-0 bg-black/55" />
 
-      {/* Content */}
-      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-12 z-10 mb-[300px]">
-        {/* Left - Logo + Tagline */}
-        <div>
-          <img
-            src="/logo.png"
-            alt="Progenesis Logo"
-            className="h-14 mb-6"
-          />
-         
-        </div>
-
-        {/* Right - Links */}
-        <div className="grid grid-cols-2 gap-10">
-          <div>
-            <h3 className="text-white font-[Manrope] text-[18px] font-semibold leading-[24px] mb-4">
-              Quick Links
-            </h3>
-            <ul className="space-y-3 text-gray-200">
-              <li><a href="#" className="hover:text-white">International Patients</a></li>
-              <li><a href="#" className="hover:text-white">EMI Options</a></li>
-              <li><a href="#" className="hover:text-white">Our Centers</a></li>
-              <li><a href="#" className="hover:text-white">About Us</a></li>
-            </ul>
+      <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+        {/* Top content: Logo + Tagline + Links */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Logo + Tagline (spans 1 col on mobile, 1 col on md) */}
+          <div className="flex flex-col items-start md:items-start">
+            <img src={Logo} alt="Progenesis Logo" className="h-10 mb-4" />
+            <p
+              className="text-sm md:text-base text-white/90 max-w-md leading-relaxed"
+              id="footer-heading"
+            >
+              Aiming to be the benchmark for reproductive health care services.
+            </p>
           </div>
 
-          <div>
-            <h3 className="text-white font-[Manrope] text-[18px] font-semibold leading-[24px] mb-4">
-              Additional Links
-            </h3>
-            <ul className="space-y-3 text-gray-200">
-              <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white">Fellowships</a></li>
-              <li><a href="#" className="hover:text-white">Second Opinion</a></li>
-              <li><a href="#" className="hover:text-white">Blogs</a></li>
-            </ul>
+          {/* Link columns: show as two columns on md+; on mobile they stack below logo */}
+          <div className="md:col-span-2 grid grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-white text-sm font-semibold mb-4">Quick Links</h3>
+              <ul className="space-y-3 text-white/80 text-sm">
+                <li><a href="#" className="hover:text-white">International Patients</a></li>
+                <li><a href="#" className="hover:text-white">EMI Options</a></li>
+                <li><a href="#" className="hover:text-white">Our Centers</a></li>
+                <li><a href="#" className="hover:text-white">About Us</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-white text-sm font-semibold mb-4">Additional Links</h3>
+              <ul className="space-y-3 text-white/80 text-sm">
+                <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-white">Fellowships</a></li>
+                <li><a href="#" className="hover:text-white">Second Opinion</a></li>
+                <li><a href="#" className="hover:text-white">Blogs</a></li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Row */}
-       <p className=" text-gray-200 font-[Manrope] text-[20px] font-normal leading-[28px] tracking-[-0.32px] max-w-md">
-            Aiming to be the benchmark for reproductive health care services.
+        {/* separator */}
+        <div className="border-t border-white/10 my-8" />
+
+        {/* bottom row: social + copyright */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-sm text-white/80 text-center md:text-left">
+            © {new Date().getFullYear()} All Rights Reserved. Progenesis Fertility Center.
           </p>
-      <div className="relative border-t border-white/30 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between z-10">
-        {/* Copyright */}
-        <p className="ext-white font-[Manrope] text-[14px] leading-[24px] tracking-[-0.28px] text-center md:text-left">
-          © 2025 All Rights Reserved. Progenesis Fertility Center
-        </p>
 
-        {/* Social Icons */}
-        <div className="flex items-center space-x-6 mt-4 md:mt-0 text-gray-200">
-          <a href="#" className="hover:text-white"><Linkedin size={22} /></a>
-          <a href="#" className="hover:text-white"><Instagram size={22} /></a>
-          <a href="#" className="hover:text-white"><Facebook size={22} /></a>
-          <a href="#" className="hover:text-white"><Twitter size={22} /></a>
+          <div className="flex items-center gap-5">
+            <a href="#" aria-label="LinkedIn" className="text-white/80 hover:text-white">
+              <Linkedin size={20} />
+            </a>
+            <a href="#" aria-label="Instagram" className="text-white/80 hover:text-white">
+              <Instagram size={20} />
+            </a>
+            <a href="#" aria-label="Facebook" className="text-white/80 hover:text-white">
+              <Facebook size={20} />
+            </a>
+            <a href="#" aria-label="Twitter" className="text-white/80 hover:text-white">
+              <Twitter size={20} />
+            </a>
+          </div>
         </div>
       </div>
+
+      {/* small bottom band to mirror screenshot shadowed footer base */}
+      <div className="absolute left-0 right-0 bottom-0 h-8 bg-black/25" />
     </footer>
   );
-};
-
-export default Footer;
+}

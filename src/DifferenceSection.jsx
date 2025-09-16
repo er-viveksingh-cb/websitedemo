@@ -23,15 +23,15 @@ const DifferenceSection = () => {
   ];
 
   return (
-    <section className="py-20">
-      <div className="max-w-4xl mx-auto text-center relative">
+    <section className="pt-20 md:py-20 ">
+      <div className="md:max-w-4xl mx-auto text-center relative px-4 md:px-[80px] ">
         {/* Small Label */}
         <span className="inline-block text-sm font-medium text-blue-700 bg-blue-100 px-3 py-1 rounded-full mb-6">
           The Progenesis Difference
         </span>
 
         {/* Heading */}
-        <h2 className="mt-6 mx-32 text-[48px] font-[Manrope] font-normal leading-[56px] tracking-[-0.96px] text-[#94BA3D] text-center ">
+        <h2 className="mt-6 md:mx-32 text-3xl md:text-5xl font-[Manrope] font-normal leading-[42px] md:leading-[56px] tracking-[-0.96px] text-[#94BA3D] text-center ">
           Choosing a fertility clinic means choosing the people <br />
           who’ll walk beside you. <br />
           At Progenesis, expert care meets heartfelt support, every step of the
@@ -45,12 +45,17 @@ const DifferenceSection = () => {
             {cards.map((card, index) => (
               <div
                 key={index}
-                className={`relative w-[408px] h-[375px] rounded-[16px] bg-[#F9F9F9] shadow-md overflow-hidden p-8 text-left border-[2px] border-white`}
+                className={`relative w-[280px] h-[255px] md:w-[408px] md:h-[375px] rounded-[16px] bg-[#F9F9F9] shadow-md overflow-hidden p-8 text-left border-[2px] border-white`}
                 style={{
-                  transform: `rotate(${
-                    index === 0 ? -3 : index === 1 ? 4 : 2
-                  }deg) translateY(${index * -60}px)`,
-                  marginTop: index > 0 ? "-200px" : "0px", // stack effect
+                  transform: `rotate(${index === 0 ? -3 : index === 1 ? 4 : 2}deg) translateY(${
+                    index * -60
+                  }px)`,
+                  marginTop:
+                    index > 0
+                      ? window.innerWidth < 768 // ✅ mobile condition
+                        ? "-100px"
+                        : "-200px"
+                      : "0px",
                   zIndex: cards.length + index,
                 }}
               >
@@ -61,13 +66,13 @@ const DifferenceSection = () => {
                 <div className="absolute -bottom-10 -left-10 w-[220px] h-[220px] rounded-full bg-[#ffffff] blur-[25px]"></div>
 
                 {/* Content */}
-                <span className="block text-[#2C2C2C] font-[Manrope] text-[48px] font-normal leading-[56px] tracking-[-0.96px] mb-24 relative z-10">
+                <span className="block text-[#2C2C2C] font-[Manrope] text-[32px] md:text-[48px] font-normal leading-[56px] tracking-[-0.96px] mb-2 md:mb-24 relative z-10">
                   {card.number}
                 </span>
-                <h3 className="text-[#2C2C2C] font-[Manrope] text-[32px] font-normal leading-[40px] tracking-[-0.64px] mb-4 relative z-10">
+                <h3 className="text-[#2C2C2C] font-[Manrope] text-[24px] md:text-[32px] font-normal leading-[40px] tracking-[-0.64px] mb-1 md:mb-4 relative z-10">
                   {card.title}
                 </h3>
-                <p className="text-[#606060] font-[Manrope] text-[16px] font-normal leading-[24px] tracking-[-0.32px] relative z-10">
+                <p className="text-[#606060] font-[Manrope] text-[12px] md:text-[16px] font-normal leading-[24px] tracking-[-0.32px] relative z-10">
                   {card.subtitle}
                 </p>
               </div>

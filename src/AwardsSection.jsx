@@ -1,3 +1,4 @@
+// AwardsSection.jsx
 import React, { useState } from "react";
 import Awards from "./awards.png";
 import Awards1 from "./awards.png";
@@ -33,20 +34,22 @@ const awards = [
   },
 ];
 
-const AwardsSection = () => {
-  const [activeTab, setActiveTab] = useState("Awards & Certifications");
+export default function AwardsSection() {
+  const [activeTab, setActiveTab] = useState(tabs[0]);
 
   return (
-    <section className="py-20 bg-gray-50 pl-[120px] pr-[250px] ">
-      <div className=" mx-auto px-6 grid lg:grid-cols-2 gap-12">
-        {/* Left Side */}
-        <div>
-          <span className="text-sm px-3 py-1 rounded-full bg-blue-100 text-blue-700 font-medium">
-            Featured News & Media
-          </span>
-          <h2 className="mt-4 text-[#2C2C2C] font-[Manrope] text-[48px] font-normal leading-[56px] tracking-[-0.96px]">
-            In the News & <br /> On the Web
-          </h2>
+    <section className="bg-gray-50 pt-[42px] md:pt-[84px] mx-0 px-4 md:px-[80px] lg:px-[120px] pb-[60px]">
+      <div className=" mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left column: heading + tabs (always first visually) */}
+          <div>
+            <span className="inline-block bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full">
+              Featured News & Media
+            </span>
+
+            <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 leading-tight">
+              In the News <br /> On the Web
+            </h2>
 
           {/* Tabs */}
           <div className="mt-6 space-y-2">
@@ -54,7 +57,7 @@ const AwardsSection = () => {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`block font-[Manrope] text-[32px] font-normal leading-[40px] tracking-[-0.64px] ${
+                className={`block font-[Manrope] text-[18px] md:text-[32px] font-normal leading-[40px] tracking-[-0.64px] ${
                   activeTab === tab
                     ? "text-[#1656A5] border-b-2 border-[#1656A5] pb-1"
                     : "text-gray-400 hover:text-gray-600"
@@ -66,40 +69,62 @@ const AwardsSection = () => {
           </div>
         </div>
 
-        {/* Right Side Grid */}
-        <div>
-          {activeTab === "Awards & Certifications" ? (
-            <div className="grid sm:grid-cols-2 gap-6">
-              {awards.map((award, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white rounded-2xl shadow-sm p-4 hover:shadow-lg transition"
-                >
-                  <img
-                    src={award.image}
-                    alt={award.title}
-                    className="w-full h-40 object-cover rounded-xl mb-4"
-                  />
-                  <div className="text-sm text-gray-500 flex justify-between">
-                    <span>{award.year}</span>
-                    <span>Awards</span>
-                  </div>
-                  <h3 className="mt-2 font-medium text-gray-900">
-                    {award.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 mt-1">{award.subtitle}</p>
+          {/* Right column: tab content */}
+          <div>
+            {activeTab === "Awards & Certifications" ? (
+              <div className="mt-2">
+                {/* Grid: single column on mobile, two columns from sm/md */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {awards.map((award, idx) => (
+                    <article
+                      key={idx}
+                      className="bg-white rounded-2xl shadow-sm overflow-hidden transition hover:shadow-md"
+                    >
+                      <div className="w-full h-44 sm:h-40 md:h-44 lg:h-48 overflow-hidden">
+                        <img
+                          src={award.image}
+                          alt={award.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+
+                      <div className="p-4 sm:p-5">
+                        <div className="flex justify-between text-xs text-gray-400 mb-2">
+                          <span>{award.year}</span>
+                          <span>Awards</span>
+                        </div>
+
+                        <h3 className="text-sm md:text-base lg:text-lg font-semibold text-gray-900 mb-2">
+                          {award.title}
+                        </h3>
+
+                        <p className="text-sm text-gray-600">{award.subtitle}</p>
+                      </div>
+                    </article>
+                  ))}
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="p-6 bg-white rounded-2xl shadow text-gray-600">
-              📚 Knowledge Center content will go here...
-            </div>
-          )}
+                {/* simple pager / arrows for mobile if desired (kept minimal) */}
+                {/* <div className="mt-6 flex items-center gap-3">
+                  <button className="w-10 h-10 rounded-lg border border-blue-600 text-blue-600 bg-white flex items-center justify-center">
+                    ←
+                  </button>
+                  <button className="w-10 h-10 rounded-lg border border-blue-600 text-blue-600 bg-white flex items-center justify-center">
+                    →
+                  </button>
+                </div> */}
+              </div>
+            ) : (
+              <div className="bg-white rounded-2xl p-6 shadow-sm">
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">Knowledge Center</h4>
+                <p className="text-sm text-gray-600">
+                  Articles, guides and patient resources will appear here. (Replace this
+                  placeholder with your real content.)
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default AwardsSection;
+}

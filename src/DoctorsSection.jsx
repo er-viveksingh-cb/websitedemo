@@ -1,3 +1,4 @@
+// DoctorsSection.jsx
 import React, { useState } from "react";
 import Doctor from "./doctorimage.png";
 
@@ -57,29 +58,29 @@ const DoctorsSection = () => {
   const doctor = doctors[currentIndex];
 
   return (
-    <section className="py-20 bg-[#F9FAFB] px-[120px]">
+    <section className="py-20 bg-[#F9FAFB] px-4 md:px-[80px] lg:px-[120px] ">
       <div>
-        {/* Heading */}\
-        <div className="flex flex-col md:flex-row items-start justify-between gap-[144px] mb-[144px]">
+        {/* Heading */}
+        <div className="flex flex-col md:flex-row items-start justify-between gap-[12px] mb:gap-[144px] mb-[144px] md:mb-[144px]">
           {/* Left */}
           <div className="max-w-[560px]">
             <span className="inline-block text-sm font-medium text-blue-700 bg-blue-100 px-3 py-1 rounded-full mb-6">
               The Experts
             </span>
-            <h2 className="text-[48px] font-[Manrope] font-normal leading-[56px] tracking-[-0.96px] text-[#2C2C2C] mb-8">
+            <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6">
               Meet the Experts <br /> Behind the Magic
             </h2>
-            <button className="px-6 py-2 border border-blue-600 text-blue-600 rounded-lg font-[Manrope] text-[14px] font-medium leading-[24px] tracking-[-0.28px] hover:bg-blue-50 transition">
+            <button className="px-[12px] md:px-12 py-[12px] md:py-3 md:rounded-[16px] rounded-[8px] text-[12px] md:text-sm font-medium  border border-blue-600 text-blue-600  hover:bg-blue-600 hover:text-white transition">
               View all Doctors
             </button>
           </div>
 
           {/* Right */}
           <div className="max-w-[600px]">
-            <p className="text-[#2C2C2C] text-[32px] leading-[40px] tracking-[-0.64px] font-[Manrope] font-normal">
+            <p className="text-[#2C2C2C] text-sm md:text-[32px] md:leading-[40px] leading-8 tracking-[-0.32px] md:tracking-[-0.64px] font-[Manrope] font-normal">
               Our team of internationally trained fertility specialists,
               embryologists, and counselors are here to support y{" "}
-              <span className="text-[rgba(44,44,44,0.25)]">
+              <span className="text-[rgba(44,44,44,0.25)] text-sm md:text-[32px] md:leading-[40px] leading-7 tracking-[-0.32px] md:tracking-[-0.64px]] font-[Manrope] font-normal">
                 ou medically and emotionally. Our team of internationally
                 trained fertility specialists, embryologists.
               </span>
@@ -87,25 +88,25 @@ const DoctorsSection = () => {
           </div>
         </div>
         {/* Doctor Card */}
-        <div className="relative flex items-center ">
+        <div className="relative flex items-center  ">
           {/* Left Arrow */}
           <button
             onClick={prevDoctor}
-            className="absolute l-14  w-12 h-12  flex items-center justify-center rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-50"
+            className="absolute l-14  w-12 h-12  hidden md:flex items-center justify-center rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-50"
           >
             ←
           </button>
 
           {/* Card */}
           {/* <div className="bg-white rounded-2xl shadow-md flex overflow-hidden border border-gray-200 mx-auto"> */}
-          <div className="bg-white rounded-2xl flex w-3xl overflow-hidden p-10 border-gray-200 mx-[120px] relative">
+          <div className=" bg-white rounded-2xl flex flex-col  md:flex-row w-[250px] md:w-3xl overflow-hidden p-2 md:p-10 border-gray-200 mx-[12px]  md:mx-[120px] relative">
             {/* Left Image */}
 
-            <p className="absolute -top-6 right-6 text-[#606060] font-[Manrope] text-[16px] font-semibold leading-[24px] tracking-[-0.32px]">
+            <p className="absolute -top-6 right-6 text-[#606060] font-[Manrope] text-[16px] font-semibold leading-[24px] tracking-[-0.32px] ">
               {String(currentIndex + 1).padStart(2, "0")} of{" "}
               {String(doctors.length).padStart(2, "0")}
             </p>
-            <div className="inline-flex h-[444px] w-[340px] justify-center items-center flex-shrink-0 rounded-xl bg-[#27C3EB] overflow-hidden">
+            <div className="inline-flex h-[200px] md:h-[444px] w-auto md:w-[340px] justify-center items-center flex-shrink-0 rounded-xl bg-[#27C3EB] overflow-hidden">
               <img
                 src={doctor.image}
                 alt={doctor.name}
@@ -114,19 +115,19 @@ const DoctorsSection = () => {
             </div>
 
             {/* Middle Section */}
-            <div className="flex flex-col justify-start pl-10 pr-10 flex-1">
+            <div className="flex flex-col justify-start pl-1 pr-1 md:pl-10 md:pr-10 flex-1">
               {/* Heading */}
-              <h3 className="text-[#1656A5] font-[Manrope] text-[48px] font-normal leading-[56px] tracking-[-0.96px]">
+              <h3 className="text-[#1656A5] font-[Manrope] text-[32px] md:text-[48px] font-normal leading-[42px] md:leading-[56px] tracking-[-0.96px]">
                 {doctor.name}
               </h3>
 
               {/* Description */}
-              <p className="mt-4 text-[#606060] font-[Manrope] text-[16px] leading-[24px] tracking-[-0.32px]">
+              <p className="mt-4 text-[#606060] font-[Manrope] text-[16px] leading-[18px] md:leading-[24px] tracking-[-0.32px]">
                 {doctor.description}
               </p>
 
               {/* Experience Boxes */}
-              <div className="mt-[108px] flex flex-wrap gap-4">
+              <div className="mt-[24px] md:mt-[108px] flex flex-wrap gap-4">
                 {doctor.experience.map((exp, idx) => (
                   <span
                     key={idx}
@@ -139,10 +140,10 @@ const DoctorsSection = () => {
             </div>
 
             {/* Divider */}
-            <div className="w-[1px] h-[450px] opacity-25 bg-black"></div>
+            <div className="w-auto h-[1px] md:w-[1px] md:h-[450px] mx-1 my-1 md:mx-0 md:my-0 opacity-25 bg-black"></div>
 
             {/* Right Section */}
-            <div className="flex flex-col justify-end pl-10">
+            <div className="flex flex-col justify-end pl-1 md:pl-10">
               <h4 className="text-[#2C2C2C] font-[Manrope] text-[48px] font-normal leading-[56px] tracking-[-0.96px]">
                 {doctor.location}
               </h4>
@@ -155,10 +156,11 @@ const DoctorsSection = () => {
           {/* Right Arrow */}
           <button
             onClick={nextDoctor}
-            className="absolute right-0 w-12 h-12 flex items-center justify-center rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-50"
+            className="hidden md:flex absolute right-0 w-12 h-12 items-center justify-center rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-50"
           >
             →
           </button>
+
         </div>
       </div>
     </section>

@@ -50,13 +50,13 @@ const Navbar = () => {
 
   return (
     <header className="w-full bg-white border-b shadow-sm font-sans ">
-      <div className=" mx-auto flex items-center justify-between h-20 px-[120px]">
+      <div className=" mx-auto flex items-center justify-between h-20 px-4 md:px-[80px] lg:px-[120px]">
         {/* Logo */}
         <div className="flex items-center">
           <img
             src="/logo.png"
             alt="Progenesis Logo"
-            className="w-[180px] h-[41.52px] object-contain"
+            className="w-[120px] h-[41.52px] md:w-[180px] md:h-[41.52px]   object-contain"
           />
         </div>
 

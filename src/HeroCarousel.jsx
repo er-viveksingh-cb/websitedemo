@@ -9,7 +9,7 @@ const HeroCarousel = () => {
       id: 1,
       image: video,
       title: "What would you like to know about your fertility journey?",
-      buttons: ["Book Your Appointment", "Find My Right Treatment"],
+      buttons: ["Book Your Appointment", "Treatment"],
     },
     {
       id: 2,
@@ -38,74 +38,83 @@ const HeroCarousel = () => {
   // }, [slides.length]);
 
   return (
-    <div className="relative w-full h-[850px] overflow-hidden">
-      {/* Background Slides */}
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`absolute inset-0 w-full h-[850px] transition-opacity duration-700 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
+    <div className="relative w-full h-[650px] md:h-[800px] xl:h-[850px]  overflow-hidden">
+  {/* Background Slides */}
+  {slides.map((slide, index) => (
+    <div
+      key={slide.id}
+      className={`absolute inset-0 w-full transition-opacity duration-700 ${
+        index === currentSlide ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      {slide.image.endsWith(".mp4") ? (
+        <video
+          src={slide.image}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        <img
+          src={slide.image}
+          alt={slide.title}
+          className="w-full h-full object-cover"
+        />
+      )}
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-25" />
+    </div>
+  ))}
+
+  {/* Content */}
+  <div className="absolute top-0 left-0 pt-[300px] px-4 md:px-[80px] lg:px-[120px] text-white max-w-[850px] z-10">
+    {/* Title */}
+    <p
+      className="
+        font-[Manrope] font-semibold text-[#F9F9F9]
+        text-[32px] leading-[40px] tracking-[-0.64px] 
+        md:text-[56px] md:leading-[64px] md:tracking-[-1px]
+        xl:text-[80px] xl:leading-[88px] xl:tracking-[-1.6px]
+      "
+    >
+      {slides[currentSlide].title}
+    </p>
+
+    {/* Buttons */}
+    <div className="flex flex-row gap-3 mt-6 md:mt-12">
+      {slides[currentSlide].buttons.map((btn, i) => (
+        <button
+          key={i}
+          className={`px-[12px] md:px-12 py-[12px] md:py-3 md:rounded-[16px] rounded-[8px] font-[Manrope] text-[12px] md:text-sm font-medium leading-[20px] sm:leading-6 tracking-[-0.24px] sm:tracking-[-0.28px] transition ${
+            i === 0
+              ? "bg-white text-[#2C2C2C] backdrop-blur-[7.5px]"
+              : "border border-white text-white backdrop-blur-[7.5px]"
           }`}
         >
-          {slide.image.endsWith(".mp4") ? (
-            <video
-              src={slide.image}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-[850px] object-cover"
-            />
-          ) : (
-            <img
-              src={slide.image}
-              alt={slide.title}
-              className="w-full h-full object-cover"
-            />
-          )}
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-25" />
-        </div>
+          {btn}
+        </button>
       ))}
-
-      {/* Content */}
-      <div className="absolute pt-[300px] pl-[120px] text-white max-w-[753px] z-10">
-        <p className="font-[Manrope] text-[80px] font-semibold leading-[88px] tracking-[-1.6px]">
-          {slides[currentSlide].title}
-        </p>
-
-        {/* Buttons */}
-        <div className="flex gap-3 mt-12">
-          {slides[currentSlide].buttons.map((btn, i) => (
-            <button
-              key={i}
-              className={`px-12 py-3 rounded-[16px] text-sm font-medium font-[Manrope] leading-6 tracking-[-0.28px] ${
-                i === 0
-                  ? "bg-white text-[#2C2C2C] backdrop-blur-[7.5px]"
-                  : "border border-white text-white backdrop-blur-[7.5px] pl-8 pr-12"
-              }`}
-            >
-              {btn}
-            </button>
-          ))}
-        </div>
-         <div className="absolute pt-[60px] flex gap-4 z-10">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-[80px] h-[2px] transition-all ${
-              index === currentSlide
-                ? "bg-[#F9F9F9]"
-                : "bg-[#F9F9F9] opacity-20"
-            }`}
-          />
-        ))}
-      </div>
-      </div>
-
-     
     </div>
+
+    {/* Navigation Dots */}
+    <div className="flex gap-4 mt-8">
+      {slides.map((_, index) => (
+        <button
+          key={index}
+          onClick={() => goToSlide(index)}
+          className={`w-[40px] sm:w-[80px] h-[2px] transition-all ${
+            index === currentSlide
+              ? "bg-[#F9F9F9]"
+              : "bg-[#F9F9F9] opacity-20"
+          }`}
+        />
+      ))}
+    </div>
+  </div>
+</div>
+
   );
 };
 

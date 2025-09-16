@@ -1,7 +1,8 @@
+// TreatmentsSection.jsx
 import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
-import image1 from "./In-VitroFertilization.png"
-import image2 from "./EggFreezingand Preservation.png"
+import image1 from "./In-VitroFertilization.png";
+import image2 from "./EggFreezingand Preservation.png";
 
 const TreatmentsSection = () => {
   const treatments = [
@@ -46,100 +47,98 @@ const TreatmentsSection = () => {
   const [selected, setSelected] = useState(0);
 
   return (
-    <section className="w-full bg-blue-50 pt-[84px] px-[120px] pb-[60px]">
-      <div >
+    <section className="w-full bg-blue-50 pt-[84px] mx-0 px-4 md:px-[80px] lg:px-[120px] pb-[60px]">
+      <div>
         {/* Header */}
-        <div className="flex flex-col md:flex-row items-start justify-between gap-8 mb-12">
+        <div className="flex flex-col xl:flex-row items-start justify-between gap-8 mb-12">
           {/* Left */}
-          <div className="max-w-2xl">
+          <div className="w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl">
             <span className="inline-block text-sm font-medium text-blue-700 bg-blue-100 px-3 py-1 rounded-full mb-4">
               Our Expertise
             </span>
-            <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
+            <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-6">
               Being India’s Best Fertility & IVF Center. We Specialize in:
             </h2>
-            <button className="px-6 py-2 border border-blue-600 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition">
+            <button className="px-[12px] md:px-12 py-[12px] md:py-3 md:rounded-[16px] rounded-[8px] text-[12px] md:text-sm font-medium  border border-blue-600 text-blue-600  hover:bg-blue-600 hover:text-white transition">
               View all treatments
             </button>
           </div>
 
           {/* Right */}
-          <div className="flex-1 pl-10">
-  <p className="text-[#2C2C2C] text-[32px] leading-[40px] tracking-[-0.64px] font-[Manrope] font-normal">
-    Our wide network of centers ensures you receive expert support closer to
-    home, and closer to comfort. Our wide network of centers ensures
-    <span className="text-[rgba(44,44,44,0.25)] text-[32px] leading-[40px] tracking-[-0.64px] font-[Manrope] font-normal">
-      {" "}
-      you receive expert support closer to home, and closer to comfort. Our wide
-      network of centers ensures you receive expert support closer to home, and
-      closer to comfort.
-    </span>
-  </p>
-</div>
-
+          <div className="flex-1 ">
+            <p className="text-[#2C2C2C] text-sm md:text-[32px] md:leading-[40px] leading-8 tracking-[-0.32px] md:tracking-[-0.64px] font-[Manrope] font-normal">
+              Our wide network of centers ensures you receive expert support
+              closer to home, and closer to comfort. Our wide network of centers
+              ensures
+              <span className="text-[rgba(44,44,44,0.25)] text-sm md:text-[32px] md:leading-[40px] leading-7 tracking-[-0.32px] md:tracking-[-0.64px]] font-[Manrope] font-normal">
+                {" "}
+                you receive expert support closer to home, and closer to
+                comfort. Our wide network of centers ensures you receive expert
+                support closer to home, and closer to comfort.
+              </span>
+            </p>
+          </div>
         </div>
 
         {/* Treatments Custom Layout */}
-<div className="flex flex-wrap gap-6">
-  {treatments.map((item, index) => {
-    // ✅ custom widths from Figma
-    const widths = [
-      "w-[495px]", // card 1
-      "w-[495px]", // card 2
-      "w-[395px]", // card 3
-      "w-[395px]", // card 4
-      "w-[496px]", // card 5
-      "w-[495px]", // card 6
-    ];
+        <div className="flex flex-wrap gap-6 w-full">
+          {treatments.map((item, index) => {
+            // ✅ make 3rd & 4th cards smaller, rest bigger
+            const isSmall = index === 2 || index === 3;
+            const widthClass = isSmall
+              ? "xl:w-[26%] md:w-[47%] sm:[30%] min-w-[280px]" // small cards (approx 395px)
+              : "xl:w-[35%] md:w-[47%] sm:[30%] min-w-[280px]"; // large cards (approx 495px)
 
-    return (
-     <div
-  key={index}
-  onClick={() => setSelected(index)}
-  className={`relative cursor-pointer rounded-2xl p-6 h-[350px] flex items-center justify-between transition ${
-    selected === index
-      ? "border border-[#1656A5] bg-white"
-      : "border border-transparent bg-white"
-  } ${widths[index]}`} 
->
-  {/* Left Side (Text) */}
-  <div className="flex flex-col max-w-[250px] pt-[100px]">
-    {/* Title */}
-    <h3 className="text-[#2C2C2C] font-semibold font-[Manrope] text-[32px] leading-[40px] tracking-[-0.64px] mb-2">
-      {item.title}
-    </h3>
+            return (
+              <div
+                key={index}
+                onClick={() => setSelected(index)}
+                className={`
+          relative cursor-pointer rounded-2xl p-6 h-[350px]
+          flex flex-col md:flex-row items-center justify-between transition
+          ${
+            selected === index
+              ? "border border-[#1656A5] bg-white"
+              : "border border-transparent bg-white"
+          }
+          w-full ${widthClass}
+        `}
+              >
+                {/* Left Side (Text) */}
+                <div className="flex flex-col w-[260px] md:w-[350px] pt-[50px] md:pt-[100px]">
+                  <h3 className="text-[#2C2C2C] font-semibold font-[Manrope] md:text-[32px] text-[20px] leading-[40px] tracking-[-0.64px] mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-6">
+                    {item.description}
+                  </p>
+                </div>
 
-    {/* Description */}
-    <p className="text-gray-600 text-sm leading-6">{item.description}</p>
-  </div>
+                {/* Right Side (Image) */}
+                <div className="flex-shrink-0 md:-mt-[150px] ">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="max-h-[180px] w-[150px] object-contain"
+                  />
+                </div>
 
-  {/* Right Side (Image) */}
-  <div className="flex-shrink-0 -mt-[150px]">
-    <img
-      src={item.image}
-      alt={item.title}
-      className="max-h-[180px] w-[150px] object-contain"
-    />
-  </div>
-
-  {/* Arrow Button */}
-  <div
-    className={`absolute top-4 left-4 w-8 h-8 flex items-center justify-center rounded-lg ${
-      selected === index ? "bg-[#1656A5]" : "bg-gray-100"
-    }`}
-  >
-    <ArrowRight
-      className={`w-4 h-4 ${
-        selected === index ? "text-white" : "text-gray-600"
-      }`}
-    />
-  </div>
-</div>
-
-    );
-  })}
-</div>
-
+                {/* Arrow Button */}
+                <div
+                  className={`absolute top-4 left-4 w-8 h-8 flex items-center justify-center rounded-lg ${
+                    selected === index ? "bg-[#1656A5]" : "bg-gray-100"
+                  }`}
+                >
+                  <ArrowRight
+                    className={`w-4 h-4 ${
+                      selected === index ? "text-white" : "text-gray-600"
+                    }`}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
