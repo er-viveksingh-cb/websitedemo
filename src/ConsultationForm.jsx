@@ -1,6 +1,90 @@
 // ConsultationForm.jsx
-import React from "react";
+
+import { Root } from "postcss";
 import contactimage from "./contact.png"; // ensure the image exists here
+
+
+import React, { useRef, useEffect, useState } from "react";
+
+
+const ScratchImage = () => {
+  const canvasRef = useRef(null);
+  const [scratchCount, setScratchCount] = useState(0);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return; // ✅ prevent null errors
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Ensure canvas has proper size
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    // Fill with blue overlay
+    ctx.fillStyle = "#1656A5";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const scratch = (e) => {
+      if (revealed) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+      const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.beginPath();
+      ctx.arc(x, y, 30, 0, Math.PI * 2);
+      ctx.fill();
+
+      setScratchCount((prev) => {
+        const newCount = prev + 1;
+        if (newCount >= 2) {
+          setRevealed(true); // ✅ reveal after 2 scratches
+        }
+        return newCount;
+      });
+    };
+
+    canvas.addEventListener("mousemove", scratch);
+    canvas.addEventListener("touchmove", scratch);
+
+    return () => {
+      canvas.removeEventListener("mousemove", scratch);
+      canvas.removeEventListener("touchmove", scratch);
+    };
+  }, [revealed]);
+
+  useEffect(() => {
+    if (revealed && canvasRef.current) {
+      const ctx = canvasRef.current.getContext("2d");
+      if (ctx) {
+        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+      }
+    }
+  }, [revealed]);
+
+  return (
+    <div className="w-full h-full relative rounded-2xl overflow-hidden">
+      {/* Image underneath */}
+      <img
+        src={contactimage}
+        alt="Consultation"
+        className="w-full h-full object-cover"
+      />
+      {/* Canvas overlay */}
+      {!revealed && (
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full"
+        />
+      )}
+    </div>
+  );
+};
+
 
 const ConsultationForm = () => {
   return (
@@ -91,15 +175,7 @@ const ConsultationForm = () => {
 
         {/* Right Image with Mask */}
         <div className="flex-1 relative">
-          <div className="w-full h-full rounded-2xl overflow-hidden relative">
-            {/* Placeholder Image */}
-            <img
-              src={contactimage}
-              alt="Consultation"
-              className="w-full h-full object-cover"
-            />
-            {/* Blue mask overlay */}
-          </div>
+          <ScratchImage />
         </div>
       </div>
     </section>

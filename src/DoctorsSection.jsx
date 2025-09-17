@@ -1,6 +1,7 @@
 // DoctorsSection.jsx
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Doctor from "./doctorimage.png";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const doctors = [
   {
@@ -44,7 +45,50 @@ const doctors = [
   },
 ];
 
+
+
+const Letter = ({ char, index, total, scrollYProgress }) => {
+  const start = index / total;
+  const end = (index + 1) / total;
+
+  const color = useTransform(
+    scrollYProgress,
+    [start, end],
+    ["rgba(44,44,44,0.25)", "#2C2C2C"]
+  );
+
+  return (
+    <motion.span
+      style={{ color }}
+      className="text-sm md:text-[32px] md:leading-[40px] leading-8 tracking-[-0.32px] md:tracking-[-0.64px] font-[Manrope] font-normal"
+    >
+      {char}
+    </motion.span>
+  );
+};
+
+
 const DoctorsSection = () => {
+
+  const ref = useRef(null);
+
+  // Track scroll relative to this block
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Animate vertical background position
+  const backgroundPosition = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0% 100%", "0% 0%"] // from bottom → top
+  );
+
+  const text =
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,";
+
+  
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevDoctor = () => {
@@ -61,7 +105,7 @@ const DoctorsSection = () => {
     <section className="py-20 bg-[#F9FAFB] px-4 md:px-[80px] lg:px-[120px] ">
       <div>
         {/* Heading */}
-        <div className="flex flex-col md:flex-row items-start justify-between gap-[12px] mb:gap-[144px] mb-[144px] md:mb-[144px]">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-[12px] mb:gap-[144px] mb-[144px] md:mb-[144px]" ref={ref}>
           {/* Left */}
           <div className="max-w-[560px]">
             <span className="inline-block text-sm font-medium text-blue-700 bg-blue-100 px-3 py-1 rounded-full mb-6">
@@ -76,15 +120,16 @@ const DoctorsSection = () => {
           </div>
 
           {/* Right */}
-          <div className="max-w-[600px]">
-            <p className="text-[#2C2C2C] text-sm md:text-[32px] md:leading-[40px] leading-8 tracking-[-0.32px] md:tracking-[-0.64px] font-[Manrope] font-normal">
-              Our team of internationally trained fertility specialists,
-              embryologists, and counselors are here to support y{" "}
-              <span className="text-[rgba(44,44,44,0.25)] text-sm md:text-[32px] md:leading-[40px] leading-7 tracking-[-0.32px] md:tracking-[-0.64px]] font-[Manrope] font-normal">
-                ou medically and emotionally. Our team of internationally
-                trained fertility specialists, embryologists.
-              </span>
-            </p>
+          <div className="max-w-3xl">
+             {text.split("").map((char, i) => (
+              <Letter
+                key={i}
+                char={char}
+                index={i}
+                total={text.length}
+                scrollYProgress={scrollYProgress}
+              />
+            ))}
           </div>
         </div>
         {/* Doctor Card */}
@@ -99,7 +144,7 @@ const DoctorsSection = () => {
 
           {/* Card */}
           {/* <div className="bg-white rounded-2xl shadow-md flex overflow-hidden border border-gray-200 mx-auto"> */}
-          <div className=" bg-white rounded-2xl flex flex-col  md:flex-row w-[250px] md:w-3xl overflow-hidden p-2 md:p-10 border-gray-200 mx-[12px]  md:mx-[120px] relative">
+          <div className=" bg-white rounded-2xl flex flex-col  md:flex-row w-[250px] md:w-auto overflow-hidden p-2 md:p-10 border-gray-200 mx-[12px]  md:mx-[120px] relative">
             {/* Left Image */}
 
             <p className="absolute -top-6 right-6 text-[#606060] font-[Manrope] text-[16px] font-semibold leading-[24px] tracking-[-0.32px] ">

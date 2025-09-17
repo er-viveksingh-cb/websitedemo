@@ -1,10 +1,49 @@
 // TreatmentsSection.jsx
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import image1 from "./In-VitroFertilization.png";
 import image2 from "./EggFreezingand Preservation.png";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+const Letter = ({ char, index, total, scrollYProgress }) => {
+  const start = index / total;
+  const end = (index + 1) / total;
+
+  const color = useTransform(
+    scrollYProgress,
+    [start, end],
+    ["rgba(44,44,44,0.25)", "#2C2C2C"]
+  );
+
+  return (
+    <motion.span
+      style={{ color }}
+      className="text-sm md:text-[32px] md:leading-[40px] leading-8 tracking-[-0.32px] md:tracking-[-0.64px] font-[Manrope] font-normal"
+    >
+      {char}
+    </motion.span>
+  );
+};
 
 const TreatmentsSection = () => {
+  const ref = useRef(null);
+
+  // Track scroll relative to this block
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Animate vertical background position
+  const backgroundPosition = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0% 100%", "0% 0%"] // from bottom → top
+  );
+
+  const text =
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,";
+
   const treatments = [
     {
       title: "In-Vitro Fertilization (IVF)",
@@ -50,7 +89,10 @@ const TreatmentsSection = () => {
     <section className="w-full bg-blue-50 pt-[84px] mx-0 px-4 md:px-[80px] lg:px-[120px] pb-[60px]">
       <div>
         {/* Header */}
-        <div className="flex flex-col xl:flex-row items-start justify-between gap-8 mb-12">
+        <div
+          className="flex flex-col xl:flex-row items-start justify-between gap-8 mb-12"
+          ref={ref}
+        >
           {/* Left */}
           <div className="w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl">
             <span className="inline-block text-sm font-medium text-blue-700 bg-blue-100 px-3 py-1 rounded-full mb-4">
@@ -65,7 +107,7 @@ const TreatmentsSection = () => {
           </div>
 
           {/* Right */}
-          <div className="flex-1 ">
+          {/* <div className="flex-1 ">
             <p className="text-[#2C2C2C] text-sm md:text-[32px] md:leading-[40px] leading-8 tracking-[-0.32px] md:tracking-[-0.64px] font-[Manrope] font-normal">
               Our wide network of centers ensures you receive expert support
               closer to home, and closer to comfort. Our wide network of centers
@@ -77,6 +119,33 @@ const TreatmentsSection = () => {
                 support closer to home, and closer to comfort.
               </span>
             </p>
+          </div> */}
+          <div className="flex-1">
+            {/*       
+          <motion.p
+            style={{
+                
+              backgroundImage:
+                "linear-gradient(to top,rgba(44,44,44,0.25) 50% ,  #2C2C2C  50%)",
+              backgroundSize: "100% 200%",  // very important for vertical sliding
+              backgroundPosition,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+            className="text-sm md:text-[32px] md:leading-[40px] leading-8 tracking-[-0.32px] md:tracking-[-0.64px] font-[Manrope] font-normal"
+          >
+            {text}
+          </motion.p> */}
+
+            {text.split("").map((char, i) => (
+              <Letter
+                key={i}
+                char={char}
+                index={i}
+                total={text.length}
+                scrollYProgress={scrollYProgress}
+              />
+            ))}
           </div>
         </div>
 
