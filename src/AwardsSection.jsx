@@ -94,11 +94,11 @@ export default function AwardsSection() {
                           <span>Awards</span>
                         </div>
 
-                        <h3 className="text-sm md:text-base lg:text-lg font-semibold text-gray-900 mb-2">
+                        <h3 className="text-sm md:text-base lg:20 font-regular text-[000000] mb-2">
                           {award.title}
                         </h3>
 
-                        <p className="text-sm text-gray-600">{award.subtitle}</p>
+                        <p className="text-sm text-[#606060]">{award.subtitle}</p>
                       </div>
                     </article>
                   ))}

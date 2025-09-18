@@ -78,7 +78,7 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="bg-gray-50 pt-[42px] md:pt-[84px] mx-0 px-4 md:px-[80px] lg:px-[120px] pb-[60px]">
+    <section className="bg-[#fafafa] pt-[42px] md:pt-[84px] mx-0 px-4 md:px-[80px] lg:px-[120px] pb-[60px]">
       <div className="mx-auto grid lg:grid-cols-2 gap-1 md:pr-[80px]">
         {/* Header / Intro */}
         <div className="mb-6">
@@ -88,11 +88,11 @@ const FaqSection = () => {
 
           <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-light text-gray-900 leading-tight">
             Quick answers to the{" "}
-            <span className="text-green-400">most common fertility-related questions.</span>
+            <span className="text-[#94BA3D]">most common fertility-related questions.</span>
           </h2>
 
           <p className="mt-4 text-sm text-gray-600">
-            Didn’t find what you are looking for?{" "}
+            Didn’t find what you are looking for?<br></br>Checkout {" "}
             <a href="#" className="text-blue-600 font-semibold underline">
               Patient Resources
             </a>{" "}
@@ -119,7 +119,7 @@ const FaqSection = () => {
                     "px-4 py-2 rounded-lg text-sm font-medium transition focus:outline-none " +
                     (active
                       ? "bg-blue-600 text-white"
-                      : "bg-white text-blue-600 border border-blue-200 hover:bg-blue-50")
+                      : "bg-white text-blue-600 border border-blue-600 hover:bg-blue-50")
                   }
                 >
                   {cat}

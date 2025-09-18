@@ -146,23 +146,23 @@ const StatItem = ({ item }) => {
     >
       {/* Label + mobile value */}
       <div className="flex justify-between items-center md:block">
-        <h3 className="text-lg md:text-xl font-medium text-gray-900">
-          {item.label}
-        </h3>
-        <div className="text-xl md:hidden font-semibold text-gray-900">
-          {item.value}
-        </div>
+        <h3 className="text-[48px] font-manrope font-normal text-[#2c2c2c]">
+  {item.label}
+</h3>
+        <div className="typo-H1-Heading text-[#2c2c2c] md:hidden">
+  {item.value}
+</div>
       </div>
 
       {/* Description */}
-      <p className="text-gray-600 text-sm md:text-base md:col-span-1 max-w-md">
-        {item.description}
-      </p>
+      <p className="typo-H4-body-copy text-[#2c2c2c] md:col-span-1 max-w-md">
+  {item.description}
+</p>
 
       {/* Value (desktop only) */}
-      <div className="hidden md:block text-2xl md:text-3xl font-semibold text-gray-900 md:text-right">
-        {item.value}
-      </div>
+      <div className="hidden md:block text-[48px] font-manrope font-normal text-[#2c2c2c] md:text-right">
+  {item.value}
+</div>
     </motion.div>
   );
 };
@@ -221,14 +221,14 @@ const StatsSection = () => {
 
       <div className="relative mx-0 px-4 md:px-[80px] lg:px-[120px]">
         {/* Badge */}
-        <span className="inline-block text-sm font-medium text-blue-700 bg-blue-100 px-3 py-1 rounded-full mb-4">
-          Stats and Metrics
-        </span>
+        <span className="inline-block text-[12px] font-manrope font-medium text-[#1656A5] bg-[#1656A5]/5 px-3 py-1 rounded-full mb-4">
+  Stats and Metrics
+</span>
 
         {/* Title */}
-        <h2 className="text-3xl md:text-5xl font-light text-gray-900 mb-12 max-w-3xl leading-snug">
-          Let the numbers <br className="hidden md:block" /> reassure your heart.
-        </h2>
+        <h2 className="text-[48px] font-manrope font-normal text-[#2c2c2c] mb-12 max-w-3xl leading-snug">
+  Let the numbers <br className="hidden md:block" /> reassure your heart.
+</h2>
 
         {/* Stats */}
         <div className="divide-y divide-gray-200">

@@ -155,8 +155,9 @@ const ConsultationForm = () => {
                 Clicking means you agree to our{" "}
                 <a href="#" className="text-blue-600 underline">
                   Privacy Policy
-                </a>{" "}
-                and T&C.
+                </a>
+                and{" "}
+                <a href="#" className="text-blue-600 underline">T&C.</a>
               </label>
             </div>
 
